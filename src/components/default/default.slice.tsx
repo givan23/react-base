@@ -59,6 +59,6 @@ export default defaultSlice.reducer;
 
 // SELECTORS
 export const changeSettingsSelector = (state: RootState) =>
-  state.default.defaultData;
+  state?.default?.defaultData;
 
-export const changeValueSelector = (state: RootState) => state.default.value;
+export const changeValueSelector = (state: RootState) => state?.default?.value;
