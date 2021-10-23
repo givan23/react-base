@@ -1,10 +1,12 @@
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 const autoprefixer = require("autoprefixer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -12,7 +14,7 @@ module.exports = {
     publicPath: "",
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: [".tsx", ".ts", ".js"],
   },
   module: {
     rules: [
@@ -44,7 +46,7 @@ module.exports = {
             loader: "postcss-loader",
             options: {
               postcssOptions: {
-                plugins: [["autoprefixer", {}]],
+                plugins: [[autoprefixer, {}]],
               },
             },
           },
@@ -61,7 +63,7 @@ module.exports = {
             loader: "file-loader",
             //options: { outputPath: './public' }, // if move assets under public folder
           },
-        ],  
+        ],
       },
       {
         test: /\.s[ac]ss$/i,
@@ -76,11 +78,24 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        parallel: true,
+      }),
+    ],
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: __dirname + "/public/index.html",
       filename: "index.html",
       inject: "body",
     }),
+    new Dotenv(),
   ],
 };
