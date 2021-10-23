@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
     chunkFilename: "[id].js",
-    publicPath: "",
+    publicPath: '/'
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -77,6 +77,9 @@ module.exports = {
         ],
       },
     ],
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   optimization: {
     minimizer: [

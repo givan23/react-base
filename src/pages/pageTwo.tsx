@@ -1,7 +1,8 @@
 import React from "react";
+import DefaultOneComponent from "../components/default-one";
 
 const PageTwo = () => {
-  return <h1>PAGE TWO</h1>;
-};  
+    return <DefaultOneComponent/>;
+};
 
 export default PageTwo;
