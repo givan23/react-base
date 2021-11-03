@@ -8,7 +8,7 @@ import {
   increment,
 } from "./default.slice";
 
-const useDefault = () => {
+const defaultHook = () => {
   const dispatch = useAppDispatch();
 
   // use Thunk
@@ -36,4 +36,4 @@ const useDefault = () => {
   };
 };
 
-export default useDefault;
+export default defaultHook;

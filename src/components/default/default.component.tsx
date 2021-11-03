@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 //import dog from "../../assets/dog.jpg";
-import useDefault from "./useDefault";
+import defaultHook from "./default.hook";
 
 const DefaultComponent = () => {
-    const {settings, value, getData, getIncrement, getDecrement} = useDefault();
+    const {settings, value, getData, getIncrement, getDecrement} = defaultHook();
+
     return (
         <div>
             {/* <img src={dog} alt="" /> */}
@@ -11,8 +12,8 @@ const DefaultComponent = () => {
                 GET DATA
             </button>
             <p data-testid="data-response">{settings?.response}</p>
-            <br/>
-            <br/>
+            <br />
+            <br />
             <button data-testid="increment-btn" onClick={getIncrement}>
                 INCREMENT
             </button>
