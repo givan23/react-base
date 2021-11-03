@@ -14,3 +14,5 @@ const DefaultOneComponent = () => {
 };
 
 export default DefaultOneComponent;
+
+// COMMIT 1
