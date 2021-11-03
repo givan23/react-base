@@ -10,20 +10,20 @@ import DefaultComponent from "../default.component";
 
 afterEach(cleanup);
 
-// redux & selectors mocks
-const useSelectorMock = jest.spyOn(reactRedux, 'useSelector');
-const useDispatchMock = jest.spyOn(reactRedux, 'useDispatch');
-
 beforeEach(() => {
     useSelectorMock.mockClear();
     useDispatchMock.mockClear();
 })
 
+// redux & selectors mocks
+const useSelectorMock = jest.spyOn(reactRedux, 'useSelector');
+const useDispatchMock = jest.spyOn(reactRedux, 'useDispatch');
+
+
 describe("With React Testing Library", () => {
     const initialState = {defaultData: {response: "no"}, value: 0};
     const mockStore = configureStore();
     const store = mockStore(initialState);
-
 
 
     test("the data button has a correct text", () => {
@@ -37,20 +37,13 @@ describe("With React Testing Library", () => {
         expect(btnDataEl.textContent).toBe("GET DATA");
     });
 
-    test("data field correct valorize", async () => {
+    test("check if the field is filled in correctly", async () => {
         render(
             <Provider store={store}>
                 <DefaultComponent />
             </Provider>
         );
-        useSelectorMock.mockReturnValue(store);
-        /*const dataResponseEl = screen.getByTestId("data-response");*/
-        /*await waitFor(() => {
-            expect(screen.getByText('no')).toBeInTheDocument()
-        })*/
-        await screen.findByText('no')
-        //await waitFor(() => expect(dataResponseEl.textContent).toBe("no"));
-
+        //useSelectorMock.mockReturnValue(store);
 
     });
 
@@ -75,12 +68,14 @@ describe("With React Testing Library", () => {
     });
 
     test("value field correct valorize", async () => {
-        const {getByTestId} = render(
+        const { container } = render(
             <Provider store={store}>
                 <DefaultComponent />
             </Provider>
         );
-        const valueResponseEl = getByTestId("value-response");
-        expect(valueResponseEl.textContent).toBe(0)
+        useSelectorMock.mockReturnValue({value: 0});
+        const valueEl = screen.getByTestId("value-response");
+        expect(valueEl.textContent).toBe(0);
+        screen.debug();
     });
 });
